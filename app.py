@@ -1,28 +1,60 @@
 from fastapi import FastAPI
-import random
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
-state = {"step": 0}
+# State
+state = {
+    "step": 0,
+    "done": False,
+    "score": 0.0
+}
+
+# Action schema (IMPORTANT)
+class Action(BaseModel):
+    action_type: str
+    value: Optional[str] = ""
 
 @app.post("/reset")
 def reset():
     state["step"] = 0
+    state["done"] = False
+    state["score"] = 0.0
+
     return {
-        "observation": {"step": 0},
+        "observation": {
+            "step": 0,
+            "score": 0.0
+        },
         "reward": 0.0,
         "done": False,
         "info": {}
     }
 
 @app.post("/step")
-def step(action: dict):
+def step(action: Action):
     state["step"] += 1
+
+    reward = 0.0
+
+    if action.action_type == "answer" and action.value:
+        reward = 1.0
+        state["score"] += reward
+    elif action.action_type == "hint":
+        reward = 0.2
+    elif action.action_type == "skip":
+        reward = -0.1
+
     done = state["step"] >= 3
+    state["done"] = done
 
     return {
-        "observation": {"step": state["step"]},
-        "reward": 1.0 if done else 0.0,
+        "observation": {
+            "step": state["step"],
+            "score": state["score"]
+        },
+        "reward": float(round(reward, 2)),
         "done": done,
         "info": {}
     }
