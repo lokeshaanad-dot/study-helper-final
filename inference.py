@@ -32,7 +32,10 @@ if __name__ == "__main__":
             action = run_inference("Give one short study tip")
 
             done = step == 3
-            reward = 1.0 if done else 0.0
+            if done:
+    reward = 0.8
+else:
+    reward = 0.4
             rewards.append(f"{reward:.2f}")
 
             print(f"[STEP] step={step} action={action} reward={reward:.2f} done={'true' if done else 'false'} error=null")
