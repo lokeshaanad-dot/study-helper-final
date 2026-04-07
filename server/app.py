@@ -1,17 +1,16 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
+import uvicorn
 
 app = FastAPI()
 
-# State
 state = {
     "step": 0,
     "done": False,
     "score": 0.0
 }
 
-# Action schema (IMPORTANT)
 class Action(BaseModel):
     action_type: str
     value: Optional[str] = ""
@@ -23,10 +22,7 @@ def reset():
     state["score"] = 0.0
 
     return {
-        "observation": {
-            "step": 0,
-            "score": 0.0
-        },
+        "observation": {"step": 0, "score": 0.0},
         "reward": 0.0,
         "done": False,
         "info": {}
@@ -62,3 +58,13 @@ def step(action: Action):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+# 🔥 REQUIRED main() function
+def main():
+    uvicorn.run(app, host="0.0.0.0", port=7860)
+
+
+# 🔥 REQUIRED entry point
+if __name__ == "__main__":
+    main()
