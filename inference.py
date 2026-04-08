@@ -24,17 +24,13 @@ if __name__ == "__main__":
     print("[START] task=study env=openenv model=" + MODEL_NAME)
     rewards = []
     tasks = [
-        {"step": 1, "reward": 0.2},
-        {"step": 2, "reward": 0.5},
-        {"step": 3, "reward": 0.8},
-        {"step": 4, "reward": 0.3},
+        {"step": 1, "reward": 0.2, "difficulty": "easy"},
+        {"step": 2, "reward": 0.5, "difficulty": "medium"},
+        {"step": 3, "reward": 0.8, "difficulty": "hard"},
     ]
     for task in tasks:
-        action = run_inference("Give one short study tip")
+        action = run_inference(f"Give one short study tip for {task['difficulty']} level")
         reward = task["reward"]
-        # Ensure reward is between 0 and 1 (exclusive)
-        if reward <= 0 or reward >= 1:
-            reward = 0.5  # default to a safe value
         rewards.append(str(reward))
         done = "true" if task["step"] == len(tasks) else "false"
         print(
