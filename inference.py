@@ -27,11 +27,14 @@ if __name__ == "__main__":
         {"step": 1, "reward": 0.2},
         {"step": 2, "reward": 0.5},
         {"step": 3, "reward": 0.8},
-        {"step": 4, "reward": 0.3},  # added a 4th task
+        {"step": 4, "reward": 0.3},
     ]
     for task in tasks:
         action = run_inference("Give one short study tip")
         reward = task["reward"]
+        # Ensure reward is between 0 and 1 (exclusive)
+        if reward <= 0 or reward >= 1:
+            reward = 0.5  # default to a safe value
         rewards.append(str(reward))
         done = "true" if task["step"] == len(tasks) else "false"
         print(
