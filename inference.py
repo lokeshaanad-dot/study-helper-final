@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     rewards = []
 
-    for step in [1,2,3,4]:
+    for step in [1,2,3]:
         action = run_inference("Give one short study tip")
 
         # HARD SAFE VALUES (non-pattern, non-edge)
@@ -35,8 +35,7 @@ if __name__ == "__main__":
             reward = 0.58
         else:
             reward = 0.79
-        else:
-            reward = 0.79
+
         rewards.append(str(reward))
 
         done = "true" if step == 3 else "false"
