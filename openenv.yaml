@@ -2,17 +2,17 @@ name: study-helper
 version: "1.0"
 
 tasks:
-- id: t1
-  grader:
-    type: Ilm
-    prompt_template: "Score between 0.1 and 0.9"
+  - id: task_easy
+    grader:
+      type: llm
+      prompt_template: "Score the output between 0.1 and 0.9"
 
-- id: t2
-  grader:
-    type: Ilm
-    prompt_template: "Score between 0.1 and 0.9"
+  - id: task_medium
+    grader:
+      type: llm
+      prompt_template: "Score the output between 0.1 and 0.9"
 
-- id: t3
-  grader:
-    type: Ilm
-    prompt_template: "Score between 0.1 and 0.9"
+  - id: task_hard
+    grader:
+      type: llm
+      prompt_template: "Score the output between 0.1 and 0.9"
