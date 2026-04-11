@@ -11,7 +11,7 @@ state = {
     "score": 0.0
 }
 
-# Action schema (IMPORTANT)
+# Action schema
 class Action(BaseModel):
     action_type: str
     value: Optional[str] = ""
@@ -27,7 +27,7 @@ def reset():
             "step": 0,
             "score": 0.0
         },
-        "reward": 0.0,
+        "reward": 0.5,   # must be between 0 and 1
         "done": False,
         "info": {}
     }
@@ -36,15 +36,17 @@ def reset():
 def step(action: Action):
     state["step"] += 1
 
-    reward = 0.0
+    # ✅ SAFE DEFAULT REWARD
+    reward = 0.5
 
+    # ✅ FIXED REWARD LOGIC (STRICTLY BETWEEN 0 AND 1)
     if action.action_type == "answer" and action.value:
-        reward = 1.0
+        reward = 0.8
         state["score"] += reward
     elif action.action_type == "hint":
-        reward = 0.2
+        reward = 0.4
     elif action.action_type == "skip":
-        reward = -0.1
+        reward = 0.2
 
     done = state["step"] >= 3
     state["done"] = done
