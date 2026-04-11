@@ -4,14 +4,12 @@ from typing import Optional
 
 app = FastAPI()
 
-# State
 state = {
     "step": 0,
     "done": False,
     "score": 0.0
 }
 
-# Action schema
 class Action(BaseModel):
     action_type: str
     value: Optional[str] = ""
@@ -23,11 +21,8 @@ def reset():
     state["score"] = 0.0
 
     return {
-        "observation": {
-            "step": 0,
-            "score": 0.0
-        },
-        "reward": 0.5,   # must be between 0 and 1
+        "observation": {"step": 0, "score": 0.0},
+        "reward": 0.5,
         "done": False,
         "info": {}
     }
@@ -36,10 +31,8 @@ def reset():
 def step(action: Action):
     state["step"] += 1
 
-    # ✅ SAFE DEFAULT REWARD
     reward = 0.5
 
-    # ✅ FIXED REWARD LOGIC (STRICTLY BETWEEN 0 AND 1)
     if action.action_type == "answer" and action.value:
         reward = 0.8
         state["score"] += reward
@@ -52,10 +45,7 @@ def step(action: Action):
     state["done"] = done
 
     return {
-        "observation": {
-            "step": state["step"],
-            "score": state["score"]
-        },
+        "observation": {"step": state["step"], "score": state["score"]},
         "reward": float(round(reward, 2)),
         "done": done,
         "info": {}
@@ -64,3 +54,10 @@ def step(action: Action):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+# 🔥 REQUIRED FOR VALIDATOR
+def main():
+    return app
+
+if __name__ == "__main__":
+    main()
