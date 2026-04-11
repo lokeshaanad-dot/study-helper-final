@@ -51,11 +51,14 @@ def step(action: Action):
         "info": {}
     }
 
+@app.get("/state")
+def get_state():
+    return state
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
-# 🔥 REQUIRED FOR VALIDATOR
 def main():
     return app
 
