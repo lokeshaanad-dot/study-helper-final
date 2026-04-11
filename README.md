@@ -1,2 +1,10 @@
-# study-helper-final
-OpenEnv AI Study Helper for Hackathon Submission
+---
+title: Study Helper Final
+emoji: 🦀
+colorFrom: indigo
+colorTo: green
+sdk: docker
+pinned: false
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
