@@ -68,3 +68,10 @@ def main():
 # 🔥 REQUIRED entry point
 if __name__ == "__main__":
     main()
+@app.get("/state")
+def get_state():
+    return {
+        "step": state["step"],
+        "score": state["score"],
+        "done": state["done"]
+    }
