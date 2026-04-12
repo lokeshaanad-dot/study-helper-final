@@ -3,13 +3,29 @@ version: "1.0"
 
 tasks:
   - id: task_easy
-    grader: "llm"
+    difficulty: easy
+    max_steps: 10
+    grader:
+      type: llm
+      prompt_template: "Score between 0.01 and 0.99"
 
   - id: task_medium
-    grader: "llm"
+    difficulty: medium
+    max_steps: 15
+    grader:
+      type: llm
+      prompt_template: "Score between 0.01 and 0.99"
 
   - id: task_hard
-    grader: "llm"
+    difficulty: hard
+    max_steps: 20
+    grader:
+      type: llm
+      prompt_template: "Score between 0.01 and 0.99"
 
   - id: task_bonus
-    grader: "llm"
+    difficulty: medium
+    max_steps: 12
+    grader:
+      type: llm
+      prompt_template: "Score between 0.01 and 0.99"
