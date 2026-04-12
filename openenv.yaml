@@ -2,26 +2,11 @@ name: study-helper
 version: "1.0"
 
 tasks:
-  - id: t1_config
-    name: "Config File Repair"
-    description: "Fix misnamed config file"
-    difficulty: easy
+  - id: t1
     grader: "grader.health_check:ConfigGrader"
 
-  - id: t2_port
-    name: "Port Issue"
-    description: "Resolve blocked port"
-    difficulty: medium
+  - id: t2
     grader: "grader.health_check:PortGrader"
 
-  - id: t3_dep
-    name: "Dependency Fix"
-    description: "Install missing dependencies"
-    difficulty: hard
+  - id: t3
     grader: "grader.health_check:DependencyGrader"
-
-  - id: t4_trap
-    name: "Trap Task"
-    description: "Verify system before acting"
-    difficulty: hard
-    grader: "grader.health_check:TrapGrader"
