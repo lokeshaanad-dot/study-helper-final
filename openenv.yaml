@@ -2,23 +2,20 @@ name: study-helper
 version: "1.0"
 
 tasks:
-  - id: task_easy
+  - id: t1_config
+    name: "Config File Repair"
+    description: "Fix misnamed config file"
     difficulty: easy
-    max_steps: 10
-    grader:
-      type: Ilm
-      prompt_template: "Score the study helper performance between 0.01 and 0.99"
+    grader: "grader.health_check:ConfigGrader"
 
-  - id: task_medium
+  - id: t2_port
+    name: "Port Issue"
+    description: "Resolve blocked port"
     difficulty: medium
-    max_steps: 15
-    grader:
-      type: Ilm
-      prompt_template: "Score the study helper performance between 0.01 and 0.99"
+    grader: "grader.health_check:PortGrader"
 
-  - id: task_hard
+  - id: t3_dep
+    name: "Dependency Fix"
+    description: "Install missing dependencies"
     difficulty: hard
-    max_steps: 20
-    grader:
-      type: Ilm
-      prompt_template: "Score the study helper performance between 0.01 and 0.99"
+    grader: "grader.health_check:DependencyGrader"
