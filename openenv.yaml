@@ -1,12 +1,20 @@
 name: study-helper
 version: "1.0"
 
+python_module: server.app
+
 tasks:
   - id: t1
+    name: "Basic Task"
+    description: "Simple validation task"
     grader: "grader.health_check:ConfigGrader"
 
   - id: t2
+    name: "Intermediate Task"
+    description: "Medium validation task"
     grader: "grader.health_check:PortGrader"
 
   - id: t3
+    name: "Advanced Task"
+    description: "Hard validation task"
     grader: "grader.health_check:DependencyGrader"
